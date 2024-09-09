@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 
 const Api = () => {
   const [data, setData] = useState([]);
@@ -8,13 +9,14 @@ const Api = () => {
 
   async function getData(page) {
     const url = `https://picsum.photos/v2/list?page=${page}&limit=10`;
+
     setLoading(true);
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
-      const json = await response.json();
+      const json = await response.json(); 
       setData(json);
     } catch (error) {
       setError(error.message);
@@ -24,7 +26,7 @@ const Api = () => {
   }
 
   useEffect(() => {
-    getData(page);
+    getData(page); 
   }, [page]);
 
   return (
@@ -38,19 +40,18 @@ const Api = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
             {data.map((item) => (
               <div key={item.id}>
-                {/* Apply class to image */}
                 <img src={item.download_url} alt={item.author} className="hover-effect" />
-                <p>Author: {item.author}</p>
+                <p>{item.author}</p>
               </div>
             ))}
           </div>
-          {/* Pagination Controls */}
-          <button onClick={() => setPage(page - 1)} disabled={page === 1}>
-            Previous Page
-          </button>
-          <button onClick={() => setPage(page + 1)}>Next Page</button>
         </div>
       )}
+      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
+        <button onClick={()=> setPage(page-1)}  Disabled={page === 1} >Previous Page</button>
+        <span>Page {page}</span>
+        <button onClick={()=> setPage(page+1)}>Next page</button>
+      </div>
     </div>
   );
 };

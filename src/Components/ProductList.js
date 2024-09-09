@@ -1,9 +1,9 @@
 import React from 'react'
-import Api from '../Assets/Api'
+import Api2 from './Api2'
 
 const ProductList = () => {
   return (
-    <div><Api /></div>
+    <div><Api2 /></div>
   )
 }
 
